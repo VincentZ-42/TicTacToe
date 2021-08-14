@@ -139,7 +139,6 @@ body {
 .footer {
   text-align: center;
   margin-top: 15px;
-  background-color: var(--header-background-color);
 }
 
 .footer-link {
