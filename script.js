@@ -56,6 +56,7 @@ const gameController = (() => {
   let gameOver = false;
 
   const isOver = () => { return gameOver; };
+  const getTurn = () => { return turn; };
   
   const getCurrentPlayerSign = () => {
     return turn % 2 === 1 ? playerX.getSign() : playerO.getSign();
@@ -79,6 +80,10 @@ const gameController = (() => {
     playerX.clearMoves();
     playerO.clearMoves();
   }; 
+
+  const getPlayers = () => {
+    return { playerX, playerO };
+  }
 
   const checkWinner = (cellIndex) => {
     const winConditions = [
@@ -116,7 +121,7 @@ const gameController = (() => {
     );
   };
 
-  return { playRound, isOver, reset };
+  return { playRound, isOver, reset, getPlayers, getTurn };
 })();
 
 // Module that controls the output of messages
@@ -124,6 +129,8 @@ const displayController = (() => {
   const cells = document.querySelectorAll('.cell');
   const message = document.getElementById('messageboard');
   const restartBtn = document.getElementById('restart-btn');
+  const changeNameBtn = document.getElementById('changeName-btn');
+  const { playerX, playerO } = gameController.getPlayers();
 
   // Ultilty Functions 
   const updateGameboard = () => {
@@ -151,11 +158,23 @@ const displayController = (() => {
     updateGameboard();
   }));
 
-  restartBtn.addEventListener('click', (e) => {
+  restartBtn.addEventListener('click', () => {
     gameBoard.reset();
     gameController.reset();
     updateGameboard();
-    setMessage("Player 1's Turn: X");
+    setMessage(`Player ${playerX.getName()}'s Turn: ${playerX.getSign()}`);
+  });
+  
+  changeNameBtn.addEventListener("click", () => {
+
+    // Sets a up number if there is an input, otherwise, keep old name
+    playerX.setName(prompt("What is the X user's Name?") || playerX.getName());
+    playerO.setName(prompt("What is the O user's Name?") || playerO.getName());
+    
+    // Gets the turn player's name and updates messageboard
+    const turn = gameController.getTurn();
+    const turnPlayer = turn % 2 === 0 ? playerO : playerX ;
+    setMessage(`Player ${turnPlayer.getName()}'s Turn: ${turnPlayer.getSign()}`)
   });
 
   return { setMessage, setWinnerMessage };
