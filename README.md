@@ -1,7 +1,8 @@
 # TicTacToe: [Play](https://vincentz-42.github.io/TicTacToe/)
 - Play against your friend on the same computer in a classic game of Tic Tac Toe!
 
-![screenshot of webpage](https://user-images.githubusercontent.com/49771001/129462100-59a97789-5a94-4d3b-bc48-3b980f321520.png)
+<p align='center'>
+  <img alt='screenshot of webpage' src='https://user-images.githubusercontent.com/49771001/129462100-59a97789-5a94-4d3b-bc48-3b980f321520.png' />
 
 ## Objective
 - Implement Tic Tac Toe Game with HTML, CSS, and Javascript
